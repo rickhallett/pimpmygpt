@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+{% block scripts %}
+<script>
+  function showSubcategories() {
+    var category = document.getElementById("main-category").value;
+    document.getElementById("reductive-operations").style.display = (category === "reductive") ? "block" : "none";
+    document.getElementById("transformational-operations").style.display = (category === "transformational") ? "block" : "none";
+    document.getElementById("generative-operations").style.display = (category === "generative") ? "block" : "none";
+    selectedValue = null;
+  }
+
+  function showDescription(category) {
+    var descriptions = {
+      "summarization": "Condenses long content into shorter form.",
+      "distillation": "Extracts core principles from complex information.",
+      "extraction": "Pulls out specific data like names or numbers.",
+      "characterizing": "Identifies the nature or genre of the text.",
+      "reformatting": "Changes the presentation style of content.",
+      "refactoring": "Rewrites for better efficiency or clarity.",
+      "language-change": "Translates between natural or coding languages.",
+      "restructuring": "Reorders content for logical flow.",
+      "modification": "Alters tone, formality, or style.",
+      "clarification": "Makes content clearer and more articulate.",
+      "content-generation": "Creating new text based on a given topic or seed phrase.",
+      "question-generation": "Creating questions based on a given text or context.",
+      "code-generation": "Writing code snippets or full programs based on user requirements.",
+      "dialogue-creation": "Generating conversational exchanges between characters or agents.",
+      "scenario-building": "Creating hypothetical situations or case studies.",
+      "data-simulation": "Generating synthetic data sets for testing or analysis.",
+      "creative-writing": "Generating poems, songs, or other forms of creative text.",
+      "instruction-generation": "Creating step-by-step guides or tutorials.",
+      "prediction": "Making forecasts based on given data or trends.",
+      "idea-brainstorming": "Generating a list of ideas or solutions for a given problem."
+    };
+
+    var selectedValue = document.getElementById(category + "-subcategory").value;
+    document.getElementById(category + "-description").innerText = descriptions[selectedValue] || '';
+
+    document.getElementById("last-selected").value = selectedValue;
+  }
+</script>
+{% endblock %}
+
+{% block header %}
+<h2>{% block title %}operations selection form{% endblock %}</h2>
+{% endblock %}
+
+{% block content %}
+
+<form action="/gpt" method="post">
+  <div>
+
+    <label for="main-category">Main Category:</label>
+    <select id="main-category" name="main_category" onchange="showSubcategories()">
+      <option value="">select a category</option>
+      <option value="reductive">Reductive Operations</option>
+      <option value="transformational">Transformational Operations</option>
+      <option value="generative">Generative Operations</option>
+    </select>
+  </div>
+
+  <br><br>
+
+  <div id="reductive-operations" style="display:none;">
+    <label for="reductive-subcategory">Reductive Operations:</label>
+    <select id="reductive-subcategory" name="reductive_subcategory" onchange="showDescription('reductive')">
+      <option value="">Select a Subcategory</option>
+      <option value="summarization">Summarization</option>
+      <option value="distillation">Distillation</option>
+      <option value="extraction">Extraction</option>
+      <option value="characterizing">Characterizing</option>
+    </select>
+    <p id="reductive-description"></p>
+  </div>
+
+  <div id="transformational-operations" style="display:none;">
+    <label for="transformational-subcategory">Transformational Operations:</label>
+    <select id="transformational-subcategory" name="transformational_subcategory"
+      onchange="showDescription('transformational')">
+      <option value="">Select a Subcategory</option>
+      <option value="reformatting">Reformatting</option>
+      <option value="refactoring">Refactoring</option>
+      <option value="language-change">Language Change</option>
+      <option value="restructuring">Restructuring</option>
+      <option value="modification">Modification</option>
+      <option value="clarification">Clarification</option>
+    </select>
+    <p id="transformational-description"></p>
+  </div>
+
+  <div id="generative-operations" style="display:none;">
+    <label for="generative-subcategory">Generative Operations:</label>
+    <select id="generative-subcategory" name="generative_subcategory" onchange="showDescription('generative')">
+      <option value="">Select a Subcategory</option>
+      <option value="content-generation">Content Generation</option>
+      <option value="question-generation">Question Generation</option>
+      <option value="code-generation">Code Generation</option>
+      <option value="dialogue-creation">Dialogue Creation</option>
+      <option value="scenario-building">Scenario Building</option>
+      <option value="data-simulation">Data Simulation</option>
+      <option value="creative-writing">Creative Writing</option>
+      <option value="instruction-generation">Instruction Generation</option>
+      <option value="prediction">Prediction</option>
+      <option value="idea-brainstorming">Idea Brainstorming</option>
+    </select>
+    <p id="generative-description"></p>
+  </div>
+
+  <div>
+    <input id="last-selected" type="text" value="" style="display:none;">
+  </div>
+
+  <br />
+
+  <input type="submit" value="Submit">
+</form>
+{% endblock %}
