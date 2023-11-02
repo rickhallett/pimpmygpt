@@ -1,8 +1,9 @@
 <!doctype html>
 <title>{% block title %}{% endblock %} | pimp my gpt</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-{% block scripts %}{% endblock %}
+<script src="{{ url_for('static', filename='app.js') }}"></script>
 <nav>
+
   <h1><a href="{{ url_for('index') }}">pimp my gpt</a></h1>
   <ul>
     {% if g.user %}
@@ -25,3 +26,4 @@
   {% endfor %}
   {% block content %}{% endblock %}
 </section>
+<canvas class="matrix"></canvas>
