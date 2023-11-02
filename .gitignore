@@ -8,10 +8,9 @@ instance/
 htmlcov/
 dist/
 build/
+.flaskenv
+.vscode/
 *.egg-info/
 .idea/
 *.swp
 *~
-
-.vscode/
-.flaskenv
