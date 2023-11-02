@@ -7,8 +7,8 @@ from flask import request
 from flask import url_for
 from werkzeug.exceptions import abort
 
-from flaskr.auth import login_required
-from flaskr.db import get_db
+from pimpmygpt.auth import login_required
+from pimpmygpt.db import get_db
 
 bp = Blueprint("blog", __name__)
 
@@ -102,7 +102,8 @@ def update(id):
         else:
             db = get_db()
             db.execute(
-                "UPDATE post SET title = ?, body = ? WHERE id = ?", (title, body, id)
+                "UPDATE post SET title = ?, body = ? WHERE id = ?", (
+                    title, body, id)
             )
             db.commit()
             return redirect(url_for("blog.index"))

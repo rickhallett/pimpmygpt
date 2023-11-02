@@ -7,8 +7,8 @@ from flask import request
 from flask import url_for
 from werkzeug.exceptions import abort
 
-from flaskr.auth import login_required
-from flaskr.db import get_db
+from pimpmygpt.auth import login_required
+from pimpmygpt.db import get_db
 
 bp = Blueprint("gpt", __name__, url_prefix="/gpt")
 
