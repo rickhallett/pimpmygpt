@@ -2,6 +2,8 @@ html {
   font-family: monospace;
   background: #000000;
   padding: 1rem;
+  height: 90%;
+  width: 90%;
 }
 
 body {
@@ -10,6 +12,8 @@ body {
   background: black;
   color: limegreen;
   text-transform: lowercase;
+  height: 100%;
+  width: 100%;
 }
 
 h1,
@@ -24,6 +28,11 @@ h6 {
 
 a {
   color: lime;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
 }
 
 p {
@@ -79,6 +88,14 @@ select {
   color: limegreen;
   font-size: 0.95rem;
   padding: 3px 2.5px;
+}
+
+textarea {
+  width: 100%;
+}
+
+form > div {
+  width: 100%;
 }
 
 .content {
@@ -139,11 +156,6 @@ select {
   align-items: center;
 }
 
-.content form > * {
-  width: fit-content;
-  margin: auto;
-}
-
 .content label {
   font-weight: bold;
   margin-bottom: 0.5em;
@@ -179,4 +191,78 @@ input {
 #subcategory-description {
   margin: 2rem 0;
   font-style: italic;
+}
+
+.create-note-input {
+  width: 100%;
+}
+
+.create-note-label {
+  align-self: flex-start;
+}
+
+.create-note-textarea {
+  width: 100%;
+}
+
+input {
+  margin: auto;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 440px) {
+  nav {
+    display: block;
+  }
+
+  form {
+    /* gap: 1rem; */
+  }
+
+  form > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #transformational-operations {
+    display: inherit;
+  }
+
+  #subcategory-description {
+    text-align: center;
+  }
+
+  .content label {
+    display: block;
+    text-align: center;
+  }
+
+  input,
+  textarea,
+  select {
+    width: 100%;
+    text-align: center;
+    margin: auto;
+  }
+
+  nav h1 {
+    flex: auto;
+    margin: 0;
+  }
+
+  nav h1 a {
+    text-decoration: none;
+    padding: 0.25rem 0.5rem;
+  }
+
+  nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
 }
