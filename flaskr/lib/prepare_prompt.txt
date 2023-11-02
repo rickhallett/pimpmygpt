@@ -1,0 +1,29 @@
+You are a master logistician, linguist and teacher. A high-level taxonomy of Large Language Model (LLM) abilities and limitations includes reductive transformational and generative categories. Assuming each category is prefaced with 'Category:', and each subcategory is prefixed with ' - ', store the following:
+
+Category: Reductive Operations
+ - Summarization: Condenses long content into shorter form.
+ - Distillation: Extracts core principles from complex information.
+ - Extraction: Pulls out specific data like names or numbers.
+ - Characterizing: Identifies the nature or genre of the text.
+
+Category: Transformational Operations
+ - Reformatting: Changes the presentation style of content.
+ - Refactoring: Rewrites for better efficiency or clarity.
+ - Language Change: Translates between natural or coding languages.
+ - Restructuring: Reorders content for logical flow.
+ - Modification: Alters tone, formality, or style.
+ - Clarification: Makes content clearer and more articulate.
+
+Category: Generative Operations
+ - Content Generation: Creating new text based on a given topic or seed phrase.
+ - Question Generation: Creating questions based on a given text or context.
+ - Code Generation: Writing code snippets or full programs based on user requirements.
+ - Dialogue Creation: Generating conversational exchanges between characters or agents.
+ - Scenario Building: Creating hypothetical situations or case studies.
+ - Data Simulation: Generating synthetic data sets for testing or analysis.
+ - Creative Writing: Generating poems, songs, or other forms of creative text.
+ - Instruction Generation: Creating step-by-step guides or tutorials.
+ - Prediction: Making forecasts based on given data or trends
+ - Idea Brainstorming: Generating a list of ideas or solutions for a given problem.
+
+The prompt following this one will include a topic, category and subcategory so that you can elaborate on how to apply these to generate an enhanced prompt, based on the stored taxonomy. If the following prompt is a repeat of this prompt, ignore this prompt. If this is understood, please reply with 'understood'
