@@ -14,11 +14,21 @@
 {% endif %}
 
 <form action=" /gpt/enhance" method="post">
+  {% if not initial_prompt %}
   <div>
     <label class="prompt-text-label" for="prompt-text">prompt:</label>
-    <textarea id="prompt-text" name="input_text" rows="4"
+    <textarea id="prompt-text" name="prompt-input" rows="4"
       placeholder="...consult your silicon overlords...politely"></textarea>
   </div>
+  {% endif %}
+
+  {% if initial_prompt %}
+  <div>
+    <label class="prompt-text-label" for="prompt-text">{{ initial_prompt }}</label>
+    <textarea id="prompt-text" name="prompt-input" rows="4"
+      placeholder="...consult your silicon overlords...politely"></textarea>
+  </div>
+  {% endif %}
 
   <div>
     <label for="main-category">Main Category:</label>
@@ -34,7 +44,7 @@
 
   <div id="reductive-operations" style="display: none">
     <label class="subcategory-label" for="reductive-subcategory">reductive operations:</label>
-    <select id="reductive-subcategory" name="reductive_subcategory" onchange="showDescription('reductive')">
+    <select id="reductive-subcategory" onchange="showDescription('reductive')">
       <option value="">select a subcategory</option>
       <option value="summarization">summarization</option>
       <option value="distillation">distillation</option>
@@ -45,8 +55,7 @@
 
   <div id="transformational-operations" style="display: none">
     <label class="subcategory-label" for="transformational-subcategory">transformational operations:</label>
-    <select id="transformational-subcategory" name="transformational_subcategory"
-      onchange="showDescription('transformational')">
+    <select id="transformational-subcategory" onchange="showDescription('transformational')">
       <option value="">select a subcategory</option>
       <option value="reformatting">reformatting</option>
       <option value="refactoring">refactoring</option>
@@ -59,7 +68,7 @@
 
   <div id="generative-operations" style="display: none">
     <label class="subcategory-label" for="generative-subcategory">generative operations:</label>
-    <select id="generative-subcategory" name="generative_subcategory" onchange="showDescription('generative')">
+    <select id="generative-subcategory" onchange="showDescription('generative')">
       <option value="">select a subcategory</option>
       <option value="content-generation">content generation</option>
       <option value="question-generation">question generation</option>
@@ -92,7 +101,7 @@
 
 
   <div>
-    <input id="last-selected" type="text" value="" hidden />
+    <input id="last-selected" name="last-selected" type="text" value="" hidden />
   </div>
 
   <br />
