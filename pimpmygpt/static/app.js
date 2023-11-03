@@ -50,25 +50,46 @@ window.onload = function () {
   const enhancedSubcategory = document.getElementById(
     "response.enhanced-subcategory"
   )?.value;
+  console.log({ enhancedCategory, enhancedSubcategory });
 
   if (document.getElementById("hackers-delight")) {
     document.getElementById("main-category").value = enhancedCategory;
     showSubcategories();
-    document.getElementById("reductive-subcategory").value =
+    document.getElementById(`${enhancedCategory}-subcategory`).value =
       enhancedSubcategory;
-    showDescription("reductive");
+    showDescription(enhancedCategory);
   }
 };
 
 function showSubcategories() {
   var category = document.getElementById("main-category").value;
+
+  [
+    "reductive-operations",
+    "transformational-operations",
+    "generative-operations",
+  ].forEach((id) => {
+    const name = id.match(/(.*)-operations/)[1];
+    const el = document.getElementById(id);
+    el.style.display = name === category ? "block" : "none";
+    console.log(el.children);
+    Array.from(el.children[1]).forEach((option) => {
+      option.selected = option.value === "";
+    });
+  });
+
   document.getElementById("reductive-operations").style.display =
     category === "reductive" ? "block" : "none";
+
   document.getElementById("transformational-operations").style.display =
     category === "transformational" ? "block" : "none";
+
   document.getElementById("generative-operations").style.display =
     category === "generative" ? "block" : "none";
+
   selectedValue = null;
+
+  showDescription(null);
 }
 
 function showDescription(category) {
@@ -102,9 +123,11 @@ function showDescription(category) {
       "Generating a list of ideas or solutions for a given problem.",
   };
 
-  var selectedValue = document.getElementById(category + "-subcategory").value;
+  var selectedValue = document.getElementById(category + "-subcategory")?.value;
   document.getElementById("subcategory-description").innerText =
-    "~ " + descriptions[selectedValue] || "";
+    descriptions[selectedValue] || "";
 
   document.getElementById("last-selected").value = selectedValue;
+
+  console.log({ descriptions, selectedValue, category });
 }

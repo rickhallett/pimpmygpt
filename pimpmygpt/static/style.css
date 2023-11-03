@@ -99,15 +99,18 @@ header .action {
 
 input,
 textarea,
-select {
+select,
+button {
   background-color: black;
   color: limegreen;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   padding: 3px 2.5px;
+  min-width: 10em;
 }
 
 textarea {
   width: 100%;
+  min-height: fit-content;
 }
 
 form > div {
@@ -185,7 +188,8 @@ form > div {
 }
 
 .content textarea {
-  min-height: 6em;
+  /* min-height: 6em; */
+  min-height: fit-content;
   resize: vertical;
 }
 
@@ -204,12 +208,16 @@ input[type="submit"] {
 
 input {
   padding: 5px 2px;
+  margin: auto;
+  min-width: 50%;
 }
 
 #subcategory-description {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
   font-style: italic;
+  color: darkgreen;
+  text-align: center;
 }
 
 .create-note-input {
@@ -224,21 +232,28 @@ input {
   width: 100%;
 }
 
-input {
-  margin: auto;
-}
-
 .pointer {
   cursor: pointer;
+}
+
+.prompt-reset-button-container {
+  display: flex;
+  justify-content: center;
+}
+
+.prompt-reset-button {
+  background-color: limegreen;
+  color: white;
+}
+
+.progress-bar-container {
+  display: flex;
+  justify-content: center;
 }
 
 @media only screen and (max-width: 440px) {
   nav {
     display: block;
-  }
-
-  form {
-    /* gap: 1rem; */
   }
 
   form > div {
@@ -266,6 +281,11 @@ input {
     width: 100%;
     text-align: center;
     margin: auto;
+  }
+
+  input[type="submit"] {
+    align-self: center;
+    width: 50%;
   }
 
   nav h1 {
