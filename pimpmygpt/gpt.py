@@ -1,5 +1,6 @@
 import os
 import json
+import threading
 from urllib import request as py_request
 from flask import Blueprint
 from flask import flash
@@ -72,16 +73,21 @@ def decode_200_res(res):
     return json.JSONDecoder().decode(res)['choices'][0]['message']['content']
 
 
-@bp.route('/')
-def index():
-    """Show initial enhance page"""
+def load_gpt_bg():
     file_parser = FileParser()
     prompt_taxonomy = file_parser.create_prompt_taxonomy()
 
     with GPTRequestContextManager(prompt_taxonomy) as res:
         understood = decode_200_res(res)
         if understood == 'understood':
-            gpt_ready = True  # TODO: create this as a background task so it is not blocking
+            return True
+
+
+@bp.route('/')
+def index():
+    """Show initial enhance page"""
+    load_gpt_thread = threading.Thread(target=load_gpt_bg)
+    load_gpt_thread.start()
 
     return render_template('gpt/index.html')
 
@@ -94,18 +100,33 @@ def enhance():
     prompt_subcategory = request.form['last-selected']
 
     initial_prompt = f"""Topic: {prompt_input}, category: {prompt_category}, subcategory: {prompt_subcategory}. 
-        Please take the topic and create an enhanced prompt based on the category and subcategory. 
-        Be as detailed as possible. In the response, do not include anything but the enhanced prompt.
-        """
+    Please take the topic and create an enhanced prompt based on the category and subcategory. 
+    Be as detailed as possible. In the response, do not include anything but the enhanced prompt.
+    """
 
     with GPTRequestContextManager(initial_prompt) as res:
         enhanced_prompt = decode_200_res(res)
+
+    return render_template('gpt/index.html',
+                           initial_prompt=prompt_input,
+                           category=prompt_category,
+                           subcategory=prompt_subcategory,
+                           enhanced_prompt=enhanced_prompt,
+                           gpt_response=None)
+
+
+@bp.route('/answer', methods=['POST'])
+def answer():
+    """Handle enhanced response with GPT-3.5 Turbo"""
+    prompt_input = request.form['prompt-input']
+    prompt_category = request.form['main-category']
+    prompt_subcategory = request.form['last-selected']
+    enhanced_prompt = request.form['enhanced-prompt-input']
 
     with GPTRequestContextManager(enhanced_prompt) as res:
         gpt_response = decode_200_res(res)
 
     return render_template('gpt/index.html',
-                           response=True,
                            initial_prompt=prompt_input,
                            category=prompt_category,
                            subcategory=prompt_subcategory,
