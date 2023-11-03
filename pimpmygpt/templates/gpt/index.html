@@ -1,5 +1,16 @@
 {% extends 'base.html' %}
 
+{% block scripts %}
+<script>
+  function onSubmitHandler() {
+    const button = document.getElementById('prompt-submit-button');
+    button.disabled = true;
+    button.value = 'loading...';
+  }
+
+</script>
+{% endblock %}
+
 {% block header %}
 <h2>{% block title %}operations selection form{% endblock %}</h2>
 {% endblock %}
@@ -8,13 +19,13 @@
 
 {% if response %}
 <div id="hackers-delight">
-  <input hidden id="response.enhanced-category" value="{{ enhanced_category }}" />
-  <input hidden id="response.enhanced-subcategory" value="{{ enhanced_subcategory }}" />
+  <input hidden id="response.enhanced-category" value="{{ category }}" />
+  <input hidden id="response.enhanced-subcategory" value="{{ subcategory }}" />
 </div>
 {% endif %}
 
-<form action=" /gpt/enhance" method="post">
-  {% if not initial_prompt %}
+<form onsubmit="onSubmitHandler()" action="/gpt/enhance" method="post">
+  {% if not response %}
   <div>
     <label class="prompt-text-label" for="prompt-text">prompt:</label>
     <textarea id="prompt-text" name="prompt-input" rows="4"
@@ -22,17 +33,17 @@
   </div>
   {% endif %}
 
-  {% if initial_prompt %}
+  {% if response %}
   <div>
-    <label class="prompt-text-label" for="prompt-text">{{ initial_prompt }}</label>
+    <label class="prompt-text-label" for="prompt-text">prompt:</label>
     <textarea id="prompt-text" name="prompt-input" rows="4"
-      placeholder="...consult your silicon overlords...politely"></textarea>
+      placeholder="...consult your silicon overlords...politely">{{ initial_prompt }}</textarea>
   </div>
   {% endif %}
 
   <div>
     <label for="main-category">Main Category:</label>
-    <select id="main-category" name="main_category" onchange="showSubcategories()">
+    <select id="main-category" name="main-category" onchange="showSubcategories()">
       <option value="">select a category</option>
       <option value="reductive">reductive operations</option>
       <option value="transformational">transformational operations</option>
@@ -89,16 +100,16 @@
   <div>
     <label class="prompt-text-label" for="enhanced-prompt-text">enhanced prompt:</label>
     <textarea id="enhanced-prompt-text" name="enhanced_input_text" rows="2" cols="50">
-{{ enhanced_prompt }}</textarea>
+        {{ enhanced_prompt }}
+    </textarea>
   </div>
   <div>
     <label class="prompt-text-label" for="prompt-response-text">response:</label>
     <textarea id="prompt-response-text" name="prompt_response_text" rows="2" cols="50">
-{{ enhanced_response }}</textarea>
+      {{ gpt_response }}
+    </textarea>
   </div>
   {% endif %}
-
-
 
   <div>
     <input id="last-selected" name="last-selected" type="text" value="" hidden />
@@ -106,6 +117,6 @@
 
   <br />
 
-  <input class="pointer" type="submit" value="Submit" />
+  <input id="prompt-submit-button" class="pointer" type="submit" value="Submit" />
 </form>
 {% endblock %}

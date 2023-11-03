@@ -60,83 +60,54 @@ class GPTRequestContextManager():
 
 class FileParser():
     def __init__(self) -> None:
+        pass
 
-        with open(os.path.join(os.path.dirname(__file__), "prepare_prompt.txt")) as file:
-            self.prepare_prompt = ''.join(file.readlines())
-
-    def convert_taxonomy_text_to_dict(self, lines):
-        operations = {}
-        current_category = None
-
-        for line in lines:
-            line = line.strip()
-            if line.endswith(':'):
-                current_category = line[:-1]
-                operations[current_category] = {}
-            elif line.startswith('-'):
-                subcategory, description = line[1:].split(':', 1)
-                operations[current_category][subcategory.strip()
-                                             ] = description.strip()
-
-        return operations
-
-
-fp = FileParser()
+    def create_prompt_taxonomy(self):
+        with open(os.path.join(os.path.dirname(__file__), "prompt_taxonomy.txt")) as file:
+            self.prompt_taxonomy = ''.join(file.readlines())
+            return self.prompt_taxonomy
 
 
 def decode_200_res(res):
     return json.JSONDecoder().decode(res)['choices'][0]['message']['content']
 
 
-def initial_request(initial_prompt):
-    prompt = gen_prompt(initial_prompt)
-
-    with GPTRequestContextManager(prompt) as result:
-        return decode_200_res(result)
-
-
-def gen_prompt(initial_prompt):
-    topic, operation_type, subcategory_choice = initial_prompt
-    return f"Topic: {topic}, category: {operation_type}, subcategory: {subcategory_choice}. Please take the topic and create an enhanced prompt based on the category and subcategory. Be as detailed as possible. In the response, do not include anything but the enhanced prompt."
-
-
-def enhanced_request(enhanced_prompt):
-    with GPTRequestContextManager(prompt=enhanced_prompt) as result:
-        return decode_200_res(result)
-
-
 @bp.route('/')
 def index():
     """Show initial enhance page"""
-    with GPTRequestContextManager(fp.prepare_prompt) as res:
+    file_parser = FileParser()
+    prompt_taxonomy = file_parser.create_prompt_taxonomy()
+
+    with GPTRequestContextManager(prompt_taxonomy) as res:
         understood = decode_200_res(res)
-        if understood == "understood":
-            print("we're good to go")
+        if understood == 'understood':
+            gpt_ready = True  # TODO: create this as a background task so it is not blocking
+
     return render_template('gpt/index.html')
 
 
 @bp.route('/enhance', methods=["POST"])
 def enhance():
     """Enhance prompt with GPT-3.5 Turbo"""
-    print(request.form)
-    initial_prompt = gen_prompt(
-        (request.form['prompt-input'], request.form['main_category'], request.form['last-selected']))
-    print(initial_prompt)
+    prompt_input = request.form['prompt-input']
+    prompt_category = request.form['main-category']
+    prompt_subcategory = request.form['last-selected']
+
+    initial_prompt = f"""Topic: {prompt_input}, category: {prompt_category}, subcategory: {prompt_subcategory}. 
+        Please take the topic and create an enhanced prompt based on the category and subcategory. 
+        Be as detailed as possible. In the response, do not include anything but the enhanced prompt.
+        """
 
     with GPTRequestContextManager(initial_prompt) as res:
-        enhanced_request = decode_200_res(res)
+        enhanced_prompt = decode_200_res(res)
 
-    print(enhanced_request)
-
-    with GPTRequestContextManager(enhanced_request) as res:
-        final_response = decode_200_res(res)
-
-    print(final_response)
+    with GPTRequestContextManager(enhanced_prompt) as res:
+        gpt_response = decode_200_res(res)
 
     return render_template('gpt/index.html',
                            response=True,
-                           initial_prompt=initial_prompt,
-                           enhanced_category=request.form['main_category'],
-                           enhanced_subcategory=request.form['last-selected'],
-                           enhanced_prompt=enhanced_request,
-                           enhanced_response=final_response)
+                           initial_prompt=prompt_input,
+                           category=prompt_category,
+                           subcategory=prompt_subcategory,
+                           enhanced_prompt=enhanced_prompt,
+                           gpt_response=gpt_response)
