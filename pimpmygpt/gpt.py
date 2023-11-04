@@ -5,6 +5,8 @@ from urllib import request as py_request
 from flask import Blueprint
 from flask import render_template
 from flask import request
+from flask import g
+from flask import flash
 from werkzeug.exceptions import abort
 
 from pimpmygpt.auth import login_required
@@ -94,6 +96,18 @@ def prompt():
     return render_template('gpt/prompt.html')
 
 
+@bp.route('/prompts')
+def prompts():
+    """Show all the prompts as history"""
+    db = get_db()
+    prompts = db.execute(
+        "SELECT p.id, initial, category, subcategory, created, enhanced, response, username"
+        " FROM prompt p JOIN user u ON p.author_id = u.id"
+        " ORDER BY created DESC"
+    ).fetchall()
+    return render_template('gpt/prompts.html', prompts=prompts)
+
+
 @bp.route('/')
 def index():
     """Info on prompt engineering"""
@@ -135,6 +149,18 @@ def answer():
 
     with GPTRequestContextManager(enhanced_prompt) as res:
         gpt_response = decode_200_res(res)
+
+    if gpt_response is not None:
+        try:
+            db = get_db()
+            db.execute(
+                "INSERT INTO prompt (initial, category, subcategory, enhanced, response, author_id) VALUES (?, ?, ?, ?, ?, ?)",
+                (prompt_input, prompt_category, prompt_subcategory,
+                 enhanced_prompt, gpt_response, g.user["id"])
+            )
+            db.commit()
+        except db.Error as ex:
+            flash(ex)
 
     return render_template('gpt/prompt.html',
                            initial_prompt=prompt_input,

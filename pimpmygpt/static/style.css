@@ -256,3 +256,7 @@ input {
   display: flex;
   justify-content: center;
 }
+
+.nav-username {
+  color: darkgreen;
+}

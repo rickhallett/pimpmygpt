@@ -60,6 +60,7 @@
 
   nav ul {
     display: flex;
+    justify-content: space-between;
     list-style: none;
     margin-top: 0.5rem;
     padding: 0;

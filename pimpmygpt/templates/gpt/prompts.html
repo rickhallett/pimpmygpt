@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1>{% block title %}prompts{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+{% for prompt in prompts %}
+<article class="note">
+  <header>
+    <div>
+      <h1>{{ prompt['title'] }}</h1>
+      <div class="about">by {{ prompt['username'] }} on {{ prompt['created'].strftime('%Y-%m-%d') }}</div>
+    </div>
+  </header>
+  <h4>Initial prompt</h4>
+  <p class="body">{{ prompt['initial'] }}</p>
+  <h4>Category</h4>
+  <p class="body">{{ prompt['category'] }}</p>
+  <h4>Operation</h4>
+  <p class="body">{{ prompt['subcategory'] }}</p>
+  <h4>Enhanced Prompt</h4>
+  <p class="body">{{ prompt['enhanced'] }}</p>
+  <h4>GPT Reponse</h4>
+  <p class="body">{{ prompt['response'] }}</p>
+</article>
+{% if not loop.last %}
+<hr style="margin-top: 10px">
+{% endif %}
+{% endfor %}
+{% endblock %}
