@@ -6,7 +6,13 @@ body {
   background: #000;
 }
 canvas {
-  display: block;
+  /* display: block; */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
 }
 
 .matrix {
@@ -28,7 +34,7 @@ body {
   background: black;
   color: limegreen;
   text-transform: lowercase;
-  height: 100%;
+  height: fit-content;
   width: 100%;
 }
 
@@ -249,59 +255,4 @@ input {
 .progress-bar-container {
   display: flex;
   justify-content: center;
-}
-
-@media only screen and (max-width: 440px) {
-  nav {
-    display: block;
-  }
-
-  form > div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  #transformational-operations {
-    display: inherit;
-  }
-
-  #subcategory-description {
-    text-align: center;
-  }
-
-  .content label {
-    display: block;
-    text-align: center;
-  }
-
-  input,
-  textarea,
-  select {
-    width: 100%;
-    text-align: center;
-    margin: auto;
-  }
-
-  input[type="submit"] {
-    align-self: center;
-    width: 50%;
-  }
-
-  nav h1 {
-    flex: auto;
-    margin: 0;
-  }
-
-  nav h1 a {
-    text-decoration: none;
-    padding: 0.25rem 0.5rem;
-  }
-
-  nav ul {
-    display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
 }

@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+
+{% block stylesheets %}
+<style>
+  .container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 10px;
+    font-size: 1.15rem;
+  }
+
+  ul,
+  li,
+  strong,
+  article {
+    font-size: 1.15rem;
+  }
+
+  li {
+    margin-bottom: 8px;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  p {
+    margin-bottom: 8px;
+    font-size: 1rem;
+  }
+
+  .category {
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  .subcategory {
+    margin-left: 20px;
+    font-size: 1rem;
+  }
+
+  @media (max-width: 420px) {
+    .subcategory {
+      margin-left: 10px;
+    }
+  }
+</style>
+{% endblock %}
+
+{% block header %}
+<h1>{% block title %}Prompt Engineering 101{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <section>
+    <article>
+      <p>Prompt engineering is the process of crafting inputs (prompts) to an AI system to elicit the most useful and
+        relevant outputs. It involves understanding the AI's capabilities and limitations, and using that knowledge to
+        design prompts that guide the AI towards producing desired results.</p>
+    </article>
+    <article>
+      <h2>Best Practices</h2>
+      <ul>
+        <li><strong>Clarity:</strong> Be specific and clear about what you are asking. Ambiguity can lead to unexpected
+          results.</li>
+        <li><strong>Context:</strong> Provide sufficient background information when necessary to frame the prompt
+          correctly.</li>
+        <li><strong>Conciseness:</strong> Keep prompts as brief as possible without sacrificing clarity or context.</li>
+        <li><strong>Iterative Approach:</strong> Use the AI's responses to refine and adjust subsequent prompts.</li>
+        <li><strong>Testing:</strong> Experiment with different phrasings and structures to understand how they affect
+          the AI's responses.</li>
+      </ul>
+    </article>
+  </section>
+  <div class="category">
+    <h2>Category: Reductive Operations</h2>
+    <p class="subcategory">- Summarization: Condenses long content into shorter form.</p>
+    <p class="subcategory">- Distillation: Extracts core principles from complex information.</p>
+    <p class="subcategory">- Extraction: Pulls out specific data like names or numbers.</p>
+    <p class="subcategory">- Characterizing: Identifies the nature or genre of the text.</p>
+  </div>
+
+  <div class="category">
+    <h2>Category: Transformational Operations</h2>
+    <p class="subcategory">- Reformatting: Changes the presentation style of content.</p>
+    <p class="subcategory">- Refactoring: Rewrites for better efficiency or clarity.</p>
+    <p class="subcategory">- Language Change: Translates between natural or coding languages.</p>
+    <p class="subcategory">- Restructuring: Reorders content for logical flow.</p>
+    <p class="subcategory">- Modification: Alters tone, formality, or style.</p>
+    <p class="subcategory">- Clarification: Makes content clearer and more articulate.</p>
+  </div>
+
+  <div class="category">
+    <h2>Category: Generative Operations</h2>
+    <p class="subcategory">- Content Generation: Creating new text based on a given topic or seed phrase.</p>
+    <p class="subcategory">- Question Generation: Creating questions based on a given text or context.</p>
+    <p class="subcategory">- Code Generation: Writing code snippets or full programs based on user requirements.</p>
+    <p class="subcategory">- Dialogue Creation: Generating conversational exchanges between characters or agents.</p>
+    <p class="subcategory">- Scenario Building: Creating hypothetical situations or case studies.</p>
+    <p class="subcategory">- Data Simulation: Generating synthetic data sets for testing or analysis.</p>
+    <p class="subcategory">- Creative Writing: Generating poems, songs, or other forms of creative text.</p>
+    <p class="subcategory">- Instruction Generation: Creating step-by-step guides or tutorials.</p>
+    <p class="subcategory">- Prediction: Making forecasts based on given data or trends.</p>
+    <p class="subcategory">- Idea Brainstorming: Generating a list of ideas or solutions for a given problem.</p>
+  </div>
+</div>
+{% endblock %}

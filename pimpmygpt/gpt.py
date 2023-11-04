@@ -26,6 +26,7 @@ class GPTRequestContextManager():
         req = py_request.Request(self._req_url, data=data,
                                  headers=headers, method='POST')
 
+        result = None
         try:
             with py_request.urlopen(req) as response:
                 result = response.read().decode()
@@ -60,32 +61,43 @@ class FileParser():
         pass
 
     def create_prompt_taxonomy(self):
-        with open(os.path.join(os.path.dirname(__file__), "prompt_taxonomy.txt")) as file:
-            self.prompt_taxonomy = ''.join(file.readlines())
-            return self.prompt_taxonomy
+        return self.prompt_taxonomy
 
 
 def decode_200_res(res):
-    return json.JSONDecoder().decode(res)['choices'][0]['message']['content']
+    json_res = None
+    try:
+        json_res = json.JSONDecoder().decode(
+            res)['choices'][0]['message']['content']
+    except BaseException as ex:
+        print(ex)
+
+    return json_res
 
 
 def load_gpt_bg():
-    file_parser = FileParser()
-    prompt_taxonomy = file_parser.create_prompt_taxonomy()
+    with open(os.path.join(os.path.dirname(__file__), "prompt_taxonomy.txt")) as file:
+        prompt_taxonomy = ''.join(file.readlines())
 
     with GPTRequestContextManager(prompt_taxonomy) as res:
-        understood = decode_200_res(res)
-        if understood == 'understood':
-            return True
+        response = decode_200_res(res)
+        if response != 'Understood':
+            print("error:", response)
 
 
 @bp.route('/')
 def index():
-    """Show initial enhance page"""
+    """Show initial gpt page"""
     load_gpt_thread = threading.Thread(target=load_gpt_bg)
     load_gpt_thread.start()
 
     return render_template('gpt/index.html')
+
+
+@bp.route('/info')
+def info():
+    """Info on prompt engineering"""
+    return render_template('gpt/info.html')
 
 
 @bp.route('/enhance', methods=["POST"])
@@ -107,7 +119,7 @@ def enhance():
                            initial_prompt=prompt_input,
                            category=prompt_category,
                            subcategory=prompt_subcategory,
-                           enhanced_prompt=enhanced_prompt,
+                           enhanced_prompt=enhanced_prompt.strip(),
                            gpt_response=None)
 
 

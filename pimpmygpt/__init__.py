@@ -6,9 +6,10 @@ from flask import Flask
 def create_app(test_config=None):
     """Create and configure an instance of the Flask application."""
     app = Flask(__name__, instance_relative_config=True)
+
     app.config.from_mapping(
         # a default secret that should be overridden by instance config
-        SECRET_KEY="dev",
+        SECRET_KEY="dda393d28808b96c555110a6959af6dedf2f324f4fb60b91bd4a7e86261cc549",
         # store the database in the instance folder
         DATABASE=os.path.join(app.instance_path, "pimpmygpt.sqlite"),
     )

@@ -7,11 +7,9 @@ window.onload = function () {
   canvas.width = window.innerWidth * 0.8;
   canvas.height = window.innerHeight * 0.8;
 
-  console.log(canvas);
-
   // Setting up the letters
   var letters =
-    "ABCDEFGHIJKLMNOPQRSTUVXYZABCDEFGHIJKLMNOPQRSTUVXYZABCDEFGHIJKLMNOPQRSTUVXYZABCDEFGHIJKLMNOPQRSTUVXYZABCDEFGHIJKLMNOPQRSTUVXYZABCDEFGHIJKLMNOPQRSTUVXYZ";
+    "ABCDEFGHIJKLMﾊﾐﾋｰｳｼﾅﾓﾆｻﾜﾂｵﾘｱﾎﾃﾏｹﾒｴｶｷﾑﾕﾗｾﾈｽﾀﾇﾍHIJKLMNOPQRSTUVXYZABCD012345789TUVXYZABCDEFGHIJKLMNOﾊﾐﾋｰｳｼﾅﾓﾆｻﾜﾂｵﾘｱﾎﾃﾏｹﾒｴｶｷﾑﾕﾗｾﾈｽﾀﾇﾍUVXYZABCDEFGHIJKLMNOPQRSTUVXYZ";
   letters = letters.split("");
 
   // Setting up the columns
@@ -23,7 +21,7 @@ window.onload = function () {
   // Setting up the drops
   var drops = [];
   for (var i = 0; i < columns; i++) {
-    drops[i] = 1;
+    drops[i] = parseInt(Math.random() * canvas.height);
   }
 
   // Setting up the draw function
@@ -50,7 +48,6 @@ window.onload = function () {
   const enhancedSubcategory = document.getElementById(
     "response.enhanced-subcategory"
   )?.value;
-  console.log({ enhancedCategory, enhancedSubcategory });
 
   if (document.getElementById("hackers-delight")) {
     document.getElementById("main-category").value = enhancedCategory;
@@ -72,7 +69,6 @@ function showSubcategories() {
     const name = id.match(/(.*)-operations/)[1];
     const el = document.getElementById(id);
     el.style.display = name === category ? "block" : "none";
-    console.log(el.children);
     Array.from(el.children[1]).forEach((option) => {
       option.selected = option.value === "";
     });
@@ -128,6 +124,4 @@ function showDescription(category) {
     descriptions[selectedValue] || "";
 
   document.getElementById("last-selected").value = selectedValue;
-
-  console.log({ descriptions, selectedValue, category });
 }

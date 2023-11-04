@@ -1,1 +1,1 @@
-web: gunicorn --chdir pimpmygpt pimpmygpt:pimpmygpt
+web: gunicorn --workers 4 --threads 100 'pimpmygpt:create_app()'
