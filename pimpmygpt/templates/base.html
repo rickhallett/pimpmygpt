@@ -14,16 +14,16 @@
 
 <body>
   <nav>
-
     <h1><a href="{{ url_for('index') }}">pimp my gpt</a></h1>
     <ul>
       {% if g.user %}
       <li><span>{{ g.user['username'] }}</span>
-      <li><a href="{{ url_for('gpt.info') }}">info</a>
-      <li><a href="{{ url_for('gpt.index') }}">gpt-3.5</a>
-      <li><a href="{{ url_for('blog.index') }}">notes</a>
+      <li><a href="{{ url_for('gpt.index') }}">info</a>
+      <li><a href="{{ url_for('gpt.prompt') }}">gpt-3.5</a>
+      <li><a href="{{ url_for('note.index') }}">notes</a>
       <li><a href="{{ url_for('auth.logout') }}">log out</a>
         {% else %}
+      <li><a href="{{ url_for('note.index') }}">notes</a>
       <li><a href="{{ url_for('auth.register') }}">register</a>
       <li><a href="{{ url_for('auth.login') }}">log In</a>
         {% endif %}

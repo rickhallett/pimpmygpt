@@ -1,0 +1,8 @@
+.pytest_cache
+.venv
+.vscode
+htmlcov
+instance
+Procfile
+pyproject.toml.bak
+README.rst

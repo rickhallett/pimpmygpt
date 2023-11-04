@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+
+{% block scripts %}
+<script>
+  function onSubmitHandler() {
+    const lastSelected = event.target.elements.namedItem('last-selected').value;
+    if (!lastSelected) {
+      event.preventDefault();
+      alert('please select a category and subcategory');
+      return;
+    }
+    const button = document.getElementById('prompt-submit-button');
+    button.disabled = true;
+    button.value = 'loading...';
+
+    startProgressIndicator();
+  }
+
+  function startProgressIndicator() {
+    let current_progress = 0,
+      interval,
+      step = 0.07;
+
+    interval = setInterval(function () {
+      current_progress += step;
+      progress = Math.round(Math.atan(current_progress) / (Math.PI / 2) * 100 * 1000) / 1000
+      $(".progress-bar").text(progress + "%");
+
+      if (progress >= 100) {
+        clearInterval(interval);
+      } else if (progress >= 70) {
+        step = 0.005
+      } else if (progress >= 50) {
+        step = 0.01
+      } else if (progress >= 30) {
+        step = 0.03
+      } else if (progress >= 10) {
+        step = 0.05
+      }
+
+      if (progress >= 100) {
+        clearInterval(interval);
+      }
+
+    }, 100);
+  }
+
+  function resetHandler() {
+    window.location.href = "{{ url_for('gpt.index') }}";
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const textareas = document.querySelectorAll('textarea');
+
+    textareas.forEach(function (textarea) {
+      textarea.addEventListener('input', function () {
+        this.style.height = 'auto';
+        this.style.height = this.scrollHeight + 'px';
+      });
+    });
+  });
+</script>
+{% endblock %}
+
+{% block header %}
+<h2>{% block title %}operations selection form{% endblock %}</h2>
+{% endblock %}
+
+{% block content %}
+
+{% if enhanced_prompt %}
+<div id="hackers-delight">
+  <input hidden id="response.enhanced-category" value="{{ category }}" />
+  <input hidden id="response.enhanced-subcategory" value="{{ subcategory }}" />
+</div>
+{% endif %}
+
+<form onsubmit="onSubmitHandler()" action="{{ url_for('gpt.answer') if enhanced_prompt else url_for('gpt.enhance') }}"
+  method="post">
+  {% if not initial_prompt %}
+  <div>
+    <label class="prompt-text-label" for="prompt-text">prompt:</label>
+    <textarea id="prompt-text" name="prompt-input" rows="4" placeholder="...consult your silicon overlords...politely"
+      required></textarea>
+  </div>
+  {% endif %}
+
+  {% if initial_prompt %}
+  <div>
+    <label class="prompt-text-label" for="prompt-text">prompt:</label>
+    <textarea id="prompt-text" name="prompt-input" rows="4">{{ initial_prompt }}</textarea>
+  </div>
+  {% endif %}
+
+  <div>
+    <label for="main-category">Main Category:</label>
+    <select id="main-category" name="main-category" onchange="showSubcategories()">
+      <option value="" selected>select a category</option>
+      <option value="reductive">reductive operations</option>
+      <option value="transformational">transformational operations</option>
+      <option value="generative">generative operations</option>
+    </select>
+  </div>
+
+  <br /><br />
+
+  <div id="reductive-operations" style="display: none">
+    <label class="subcategory-label" for="reductive-subcategory">reductive operations:</label>
+    <select id="reductive-subcategory" onchange="showDescription('reductive')">
+      <option value="" selected>select a subcategory</option>
+      <option value="summarization">summarization</option>
+      <option value="distillation">distillation</option>
+      <option value="extraction">extraction</option>
+      <option value="characterizing">characterizing</option>
+    </select>
+  </div>
+
+  <div id="transformational-operations" style="display: none">
+    <label class="subcategory-label" for="transformational-subcategory">transformational operations:</label>
+    <select id="transformational-subcategory" onchange="showDescription('transformational')">
+      <option value="" selected>select a subcategory</option>
+      <option value="reformatting">reformatting</option>
+      <option value="refactoring">refactoring</option>
+      <option value="language-change">language change</option>
+      <option value="restructuring">restructuring</option>
+      <option value="modification">modification</option>
+      <option value="clarification">clarification</option>
+    </select>
+  </div>
+
+  <div id="generative-operations" style="display: none">
+    <label class="subcategory-label" for="generative-subcategory">generative operations:</label>
+    <select id="generative-subcategory" onchange="showDescription('generative')">
+      <option value="">select a subcategory</option>
+      <option value="content-generation">content generation</option>
+      <option value="question-generation">question generation</option>
+      <option value="code-generation">code generation</option>
+      <option value="dialogue-creation">dialogue creation</option>
+      <option value="scenario-building">scenario building</option>
+      <option value="data-simulation">data simulation</option>
+      <option value="creative-writing">creative writing</option>
+      <option value="instruction-generation">instruction generation</option>
+      <option value="prediction">prediction</option>
+      <option value="idea-brainstorming">idea brainstorming</option>
+    </select>
+  </div>
+
+  <div class="subcategory-description-container" id="subcategory-description"></div>
+
+  {% if enhanced_prompt %}
+  <div>
+    <label class="prompt-text-label" for="enhanced-prompt-input">enhanced prompt:</label>
+    <textarea id="enhanced-prompt-text" name="enhanced-prompt-input" rows="8" cols="50">
+        {{ enhanced_prompt }}
+    </textarea>
+  </div>
+  {% endif %}
+
+  {% if gpt_response %}
+  <div>
+    <label class="prompt-text-label" for="prompt-response-text">response:</label>
+    <textarea id="prompt-response-text" name="prompt-response-text" rows="12" cols="50">
+      {{ gpt_response }}
+    </textarea>
+  </div>
+  {% endif %}
+
+  <div>
+    <input id="last-selected" name="last-selected" type="text" value="" hidden />
+  </div>
+
+  <br />
+
+  {% if not gpt_response %}
+  <input id="prompt-submit-button" class="pointer" type="submit"
+    value="{{ 'ask GPT' if enhanced_prompt else 'refine' }}" />
+  <div class="progress-bar-container">
+
+    <div class="progress-bar" role="progressbar"></div>
+  </div>
+  {% endif %}
+
+
+</form>
+
+{% if gpt_response %}
+<div class="prompt-reset-button-container">
+  <button class="prompt-reset-button" class="pointer" value="reset" onsubmit="resetHandler()"
+    onclick="resetHandler()">reset</button>
+</div>
+{% endif %}
+
+{% endblock %}

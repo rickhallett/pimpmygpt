@@ -10,7 +10,7 @@ from werkzeug.exceptions import abort
 from pimpmygpt.auth import login_required
 from pimpmygpt.db import get_db
 
-bp = Blueprint("gpt", __name__, url_prefix="/gpt")
+bp = Blueprint("gpt", __name__)
 
 
 class GPTRequestContextManager():
@@ -81,26 +81,27 @@ def load_gpt_bg():
 
     with GPTRequestContextManager(prompt_taxonomy) as res:
         response = decode_200_res(res)
-        if response != 'Understood':
-            print("error:", response)
+        print("load-gpt:", response)
 
 
-@bp.route('/')
-def index():
+@bp.route('/prompt')
+@login_required
+def prompt():
     """Show initial gpt page"""
     load_gpt_thread = threading.Thread(target=load_gpt_bg)
     load_gpt_thread.start()
 
+    return render_template('gpt/prompt.html')
+
+
+@bp.route('/')
+def index():
+    """Info on prompt engineering"""
     return render_template('gpt/index.html')
 
 
-@bp.route('/info')
-def info():
-    """Info on prompt engineering"""
-    return render_template('gpt/info.html')
-
-
 @bp.route('/enhance', methods=["POST"])
+@login_required
 def enhance():
     """Enhance prompt with GPT-3.5 Turbo"""
     prompt_input = request.form['prompt-input']
@@ -115,7 +116,7 @@ def enhance():
     with GPTRequestContextManager(initial_prompt) as res:
         enhanced_prompt = decode_200_res(res)
 
-    return render_template('gpt/index.html',
+    return render_template('gpt/prompt.html',
                            initial_prompt=prompt_input,
                            category=prompt_category,
                            subcategory=prompt_subcategory,
@@ -124,6 +125,7 @@ def enhance():
 
 
 @bp.route('/answer', methods=['POST'])
+@login_required
 def answer():
     """Handle enhanced response with GPT-3.5 Turbo"""
     prompt_input = request.form['prompt-input']
@@ -134,7 +136,7 @@ def answer():
     with GPTRequestContextManager(enhanced_prompt) as res:
         gpt_response = decode_200_res(res)
 
-    return render_template('gpt/index.html',
+    return render_template('gpt/prompt.html',
                            initial_prompt=prompt_input,
                            category=prompt_category,
                            subcategory=prompt_subcategory,

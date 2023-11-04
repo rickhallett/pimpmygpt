@@ -30,7 +30,7 @@ def test_author_required(app, client, auth):
         db.commit()
 
     auth.login()
-    # current user can't modify other user's post
+    # current user can't modify other user's note
     assert client.post("/1/update").status_code == 403
     assert client.post("/1/delete").status_code == 403
     # current user doesn't see edit link
@@ -50,7 +50,7 @@ def test_create(client, auth, app):
 
     with app.app_context():
         db = get_db()
-        count = db.execute("SELECT COUNT(id) FROM post").fetchone()[0]
+        count = db.execute("SELECT COUNT(id) FROM note").fetchone()[0]
         assert count == 2
 
 
@@ -61,8 +61,8 @@ def test_update(client, auth, app):
 
     with app.app_context():
         db = get_db()
-        post = db.execute("SELECT * FROM post WHERE id = 1").fetchone()
-        assert post["title"] == "updated"
+        note = db.execute("SELECT * FROM post WHERE id = 1").fetchone()
+        assert note["title"] == "updated"
 
 
 @pytest.mark.parametrize("path", ("/create", "/1/update"))
@@ -79,5 +79,5 @@ def test_delete(client, auth, app):
 
     with app.app_context():
         db = get_db()
-        post = db.execute("SELECT * FROM post WHERE id = 1").fetchone()
-        assert post is None
+        note = db.execute("SELECT * FROM note WHERE id = 1").fetchone()
+        assert note is None

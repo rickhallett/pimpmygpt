@@ -72,9 +72,18 @@ def register():
                 # The username was already taken, which caused the
                 # commit to fail. Show a validation error.
                 error = f"User {username} is already registered."
+
+        if error is None:
+            try:
+                user = db.execute(
+                    "SELECT * FROM user WHERE username = ?", (username,)
+                ).fetchone()
+            except db.Error as ex:
+                flash(ex)
             else:
-                # Success, go to the login page.
-                return redirect(url_for("auth.login"))
+                session.clear()
+                session["user_id"] = user["id"]
+                return redirect(url_for("gpt.prompt"))
 
         flash(error)
 
