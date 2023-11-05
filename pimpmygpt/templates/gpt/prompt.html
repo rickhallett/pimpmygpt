@@ -33,6 +33,22 @@
     }, 100);
   }
 
+  async function onChangeModelHandler() {
+    const model = document.getElementById('gpt-model').value;
+
+    try {
+      await fetch(`change-gpt-model`, {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ "gpt-model": model })
+      });
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   function resetHandler() {
     window.location.href = "{{ url_for('gpt.prompt') }}";
   }
@@ -65,6 +81,19 @@
 
 <form onsubmit="onSubmitHandler()" action="{{ url_for('gpt.answer') if enhanced_prompt else url_for('gpt.enhance') }}"
   method="post">
+  {% if gpt_model == "gpt-3.5-turbo" or not gpt_model %}
+  <select id="gpt-model" name="gpt-model" onchange="onChangeModelHandler()">
+    <option value="gpt-3.5-turbo" selected>GPT-3.5-Turbo</option>
+    <option value="gpt-4">GPT-4</option>
+  </select>
+  {% endif %}
+  {% if gpt_model == "gpt-4" %}
+  <select id="gpt-model" name="gpt-model" onchange="onChangeModelHandler()">
+    <option value="gpt-3.5-turbo">GPT-3.5-Turbo</option>
+    <option value="gpt-4" selected>GPT-4</option>
+  </select>
+  {% endif %}
+
   {% if not initial_prompt %}
   <div>
     <label class="prompt-text-label" for="prompt-text">prompt:</label>

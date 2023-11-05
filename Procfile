@@ -1,1 +1,0 @@
-web: gunicorn --workers 4 --threads 100 'pimpmygpt:create_app()'

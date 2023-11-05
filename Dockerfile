@@ -13,10 +13,11 @@ RUN pip install --no-cache-dir -r requirements.txt
 RUN flask --app pimpmygpt init-db
 
 # Make port 8000 available to the world outside this container
-EXPOSE 8000
+EXPOSE 8080
 
 # Define environment variable
-ENV OPENAI_API_KEY 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
+ENV OPENAI_API_KEY=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
+ENV OPENAI_ORG=org-arjEfAsu33nzjAa2JdvG9lfS
 
 # Copy the entrypoint script into the container
 # COPY entrypoint.sh ./
@@ -27,4 +28,4 @@ ENV OPENAI_API_KEY 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
 # ENTRYPOINT [ "./entrypoint.sh" ]
 
 # Run Gunicorn with one worker for simplicity
-CMD ["gunicorn", "--workers", "4", "--timeout", "180", "-b", "0.0.0.0:8000", "pimpmygpt:create_app()"]
+CMD ["gunicorn", "--workers", "4", "--timeout", "180", "-b", "0.0.0.0:8080", "pimpmygpt:create_app()"]

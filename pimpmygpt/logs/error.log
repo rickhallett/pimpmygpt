@@ -1,0 +1,72 @@
+2023-11-04 16:20:51,934 - pimpmygpt.pimp_scribbler - ERROR - HTTP Error 401: Unauthorized
+2023-11-04 16:20:51,936 - pimpmygpt.pimp_scribbler - ERROR - expected string or bytes-like object, got 'NoneType'
+2023-11-04 16:21:04,217 - pimpmygpt.pimp_scribbler - ERROR - HTTP Error 401: Unauthorized
+2023-11-04 16:21:04,218 - pimpmygpt.pimp_scribbler - ERROR - expected string or bytes-like object, got 'NoneType'
+2023-11-04 16:21:24,955 - pimpmygpt.pimp_scribbler - ERROR - HTTP Error 401: Unauthorized
+2023-11-04 16:21:24,958 - pimpmygpt.pimp_scribbler - ERROR - expected string or bytes-like object, got 'NoneType'
+2023-11-04 16:22:17,435 - pimpmygpt.pimp_scribbler - ERROR - HTTP Error 401: Unauthorized
+2023-11-04 16:22:17,437 - pimpmygpt.pimp_scribbler - ERROR - expected string or bytes-like object, got 'NoneType'
+2023-11-04 16:22:22,948 - pimpmygpt.pimp_scribbler - ERROR - HTTP Error 401: Unauthorized
+2023-11-04 16:22:22,949 - pimpmygpt.pimp_scribbler - ERROR - expected string or bytes-like object, got 'NoneType'
+2023-11-04 16:22:31,737 - pimpmygpt.pimp_scribbler - ERROR - HTTP Error 401: Unauthorized
+2023-11-04 16:22:31,741 - pimpmygpt.pimp_scribbler - ERROR - expected string or bytes-like object, got 'NoneType'
+2023-11-04 16:23:38,396 - pimpmygpt.pimp_scribbler - ERROR - HTTP Error 401: Unauthorized
+2023-11-04 16:23:38,399 - pimpmygpt.pimp_scribbler - ERROR - expected string or bytes-like object, got 'NoneType'
+2023-11-04 16:23:41,666 - pimpmygpt.pimp_scribbler - ERROR - HTTP Error 401: Unauthorized
+2023-11-04 16:23:41,668 - pimpmygpt.pimp_scribbler - ERROR - expected string or bytes-like object, got 'NoneType'
+2023-11-04 16:23:49,268 - pimpmygpt.pimp_scribbler - ERROR - HTTP Error 401: Unauthorized
+2023-11-04 16:23:49,269 - pimpmygpt.pimp_scribbler - ERROR - expected string or bytes-like object, got 'NoneType'
+2023-11-04 16:28:02,761 - pimpmygpt.pimp_scribbler - ERROR - HTTP Error 429: Too Many Requests
+2023-11-04 16:28:02,763 - pimpmygpt.pimp_scribbler - ERROR - expected string or bytes-like object, got 'NoneType'
+2023-11-04 16:28:12,596 - pimpmygpt.pimp_scribbler - ERROR - HTTP Error 429: Too Many Requests
+2023-11-04 16:28:12,598 - pimpmygpt.pimp_scribbler - ERROR - expected string or bytes-like object, got 'NoneType'
+2023-11-04 18:30:24,544 - pimpmygpt.pimp_scribbler - ERROR - HTTP Error 429: Too Many Requests
+2023-11-04 18:30:24,546 - pimpmygpt.pimp_scribbler - ERROR - expected string or bytes-like object, got 'NoneType'
+2023-11-04 18:30:55,651 - pimpmygpt.pimp_scribbler - ERROR - HTTP Error 429: Too Many Requests
+2023-11-04 18:30:55,654 - pimpmygpt.pimp_scribbler - ERROR - expected string or bytes-like object, got 'NoneType'
+2023-11-04 18:45:50,592 - pimpmygpt.pimp_scribbler - ERROR - HTTP Error 429: Too Many Requests
+2023-11-04 18:45:50,594 - pimpmygpt.pimp_scribbler - ERROR - expected string or bytes-like object, got 'NoneType'
+2023-11-04 18:45:59,083 - pimpmygpt.pimp_scribbler - ERROR - HTTP Error 429: Too Many Requests
+2023-11-04 18:45:59,086 - pimpmygpt.pimp_scribbler - ERROR - expected string or bytes-like object, got 'NoneType'
+2023-11-04 18:46:18,151 - pimpmygpt.pimp_scribbler - ERROR - HTTP Error 429: Too Many Requests
+2023-11-04 18:46:18,153 - pimpmygpt.pimp_scribbler - ERROR - expected string or bytes-like object, got 'NoneType'
+2023-11-04 18:47:27,878 - pimpmygpt.pimp_scribbler - ERROR - HTTP Error 429: Too Many Requests
+2023-11-04 18:47:27,880 - pimpmygpt.pimp_scribbler - ERROR - expected string or bytes-like object, got 'NoneType'
+2023-11-04 18:48:11,819 - pimpmygpt.pimp_scribbler - ERROR - HTTP Error 429: Too Many Requests
+2023-11-04 18:48:11,822 - pimpmygpt.pimp_scribbler - ERROR - expected string or bytes-like object, got 'NoneType'
+2023-11-04 18:48:29,918 - pimpmygpt.pimp_scribbler - ERROR - HTTP Error 429: Too Many Requests
+2023-11-04 18:48:29,920 - pimpmygpt.pimp_scribbler - ERROR - expected string or bytes-like object, got 'NoneType'
+2023-11-04 18:50:05,976 - pimpmygpt.pimp_scribbler - ERROR - HTTP Error 429: Too Many Requests
+2023-11-04 18:50:05,978 - pimpmygpt.pimp_scribbler - ERROR - expected string or bytes-like object, got 'NoneType'
+2023-11-04 18:50:17,458 - pimpmygpt.pimp_scribbler - ERROR - HTTP Error 429: Too Many Requests
+2023-11-04 18:50:17,460 - pimpmygpt.pimp_scribbler - ERROR - expected string or bytes-like object, got 'NoneType'
+2023-11-05 11:29:03,587 - pimpmygpt.pimp_scribbler - ERROR - HTTP Error 429: Too Many Requests
+2023-11-05 11:29:03,588 - pimpmygpt.pimp_scribbler - ERROR - expected string or bytes-like object, got 'NoneType'
+2023-11-05 11:29:20,389 - pimpmygpt.pimp_scribbler - ERROR - HTTP Error 429: Too Many Requests
+2023-11-05 11:29:20,391 - pimpmygpt.pimp_scribbler - ERROR - expected string or bytes-like object, got 'NoneType'
+2023-11-05 11:36:23,752 - pimpmygpt.pimp_scribbler - ERROR - HTTP Error 401: Unauthorized
+2023-11-05 11:36:23,756 - pimpmygpt.pimp_scribbler - ERROR - expected string or bytes-like object, got 'NoneType'
+2023-11-05 11:40:34,168 - pimpmygpt.pimp_scribbler - ERROR - HTTP Error 401: Unauthorized
+2023-11-05 11:40:34,173 - pimpmygpt.pimp_scribbler - ERROR - expected string or bytes-like object, got 'NoneType'
+2023-11-05 11:42:35,283 - pimpmygpt.pimp_scribbler - ERROR - HTTP Error 401: Unauthorized
+2023-11-05 11:42:35,286 - pimpmygpt.pimp_scribbler - ERROR - expected string or bytes-like object, got 'NoneType'
+2023-11-05 11:43:13,321 - pimpmygpt.pimp_scribbler - ERROR - HTTP Error 401: Unauthorized
+2023-11-05 11:43:13,323 - pimpmygpt.pimp_scribbler - ERROR - expected string or bytes-like object, got 'NoneType'
+2023-11-05 11:43:28,183 - pimpmygpt.pimp_scribbler - ERROR - HTTP Error 401: Unauthorized
+2023-11-05 11:43:28,185 - pimpmygpt.pimp_scribbler - ERROR - expected string or bytes-like object, got 'NoneType'
+2023-11-05 11:44:22,304 - pimpmygpt.pimp_scribbler - ERROR - HTTP Error 401: Unauthorized
+2023-11-05 11:44:22,306 - pimpmygpt.pimp_scribbler - ERROR - expected string or bytes-like object, got 'NoneType'
+2023-11-05 11:45:57,201 - pimpmygpt.pimp_scribbler - ERROR - HTTP Error 401: Unauthorized
+2023-11-05 11:45:57,203 - pimpmygpt.pimp_scribbler - ERROR - expected string or bytes-like object, got 'NoneType'
+2023-11-05 11:46:14,897 - pimpmygpt.pimp_scribbler - ERROR - HTTP Error 401: Unauthorized
+2023-11-05 11:46:14,899 - pimpmygpt.pimp_scribbler - ERROR - expected string or bytes-like object, got 'NoneType'
+2023-11-05 11:47:14,625 - pimpmygpt.pimp_scribbler - ERROR - 'PimpScribbler' object has no attribute 'info'
+2023-11-05 11:47:14,626 - pimpmygpt.pimp_scribbler - ERROR - expected string or bytes-like object, got 'NoneType'
+2023-11-05 11:58:03,640 - pimpmygpt.pimp_scribbler - ERROR - 'PimpScribbler' object has no attribute 'info'
+2023-11-05 11:58:03,641 - pimpmygpt.pimp_scribbler - ERROR - expected string or bytes-like object, got 'NoneType'
+2023-11-05 11:58:24,229 - pimpmygpt.pimp_scribbler - ERROR - 'PimpScribbler' object has no attribute 'info'
+2023-11-05 11:58:24,235 - pimpmygpt.pimp_scribbler - ERROR - expected string or bytes-like object, got 'NoneType'
+2023-11-05 12:06:06,066 - pimpmygpt.pimp_scribbler - ERROR - HTTP Error 404: Not Found
+2023-11-05 12:06:06,069 - pimpmygpt.pimp_scribbler - ERROR - expected string or bytes-like object, got 'NoneType'
+2023-11-05 12:29:41,816 - pimpmygpt.pimp_scribbler - ERROR - HTTP Error 404: Not Found
+2023-11-05 12:29:41,820 - pimpmygpt.pimp_scribbler - ERROR - expected string or bytes-like object, got 'NoneType'

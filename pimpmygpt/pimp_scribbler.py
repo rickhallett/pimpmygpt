@@ -7,18 +7,17 @@ class PimpScribbler(object):
 
     def __new__(cls):
         if cls._instance is None:
-            print('Creating the object')
             cls._instance = super(PimpScribbler, cls).__new__(cls)
             logger = logging.getLogger(__name__)
             logger.setLevel(logging.DEBUG)  # Set level of logger
 
-            debug_handler = logging.FileHandler('debug.log')
+            debug_handler = logging.FileHandler('./pimpmygpt/logs/debug.log')
             debug_handler.setLevel(logging.DEBUG)
 
-            error_handler = logging.FileHandler('error.log')
+            error_handler = logging.FileHandler('./pimpmygpt/logs/error.log')
             error_handler.setLevel(logging.ERROR)
 
-            info_handler = logging.FileHandler('info.log')
+            info_handler = logging.FileHandler('./pimpmygpt/logs/info.log')
             info_handler.setLevel(logging.INFO)
 
             # Create formatters and add it to handlers
@@ -37,5 +36,5 @@ class PimpScribbler(object):
         return cls._instance
 
     @property
-    def logger(self):
+    def log(self):
         return self._logger

@@ -13,6 +13,8 @@
       <div class="about">by {{ prompt['username'] }} on {{ prompt['created'].strftime('%Y-%m-%d') }}</div>
     </div>
   </header>
+  <h4>Model</h4>
+  <p class="body">{{ prompt['model'] }}</p>
   <h4>Initial prompt</h4>
   <p class="body">{{ prompt['initial'] }}</p>
   <h4>Category</h4>
