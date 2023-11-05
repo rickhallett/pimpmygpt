@@ -32,12 +32,15 @@ class GPTRequestContextManager():
         req = py_request.Request(self._req_url, data=data,
                                  headers=headers, method='POST')
 
+        print("headers", headers)
         scribble.log.info((data, headers))
         result = None
         try:
             with py_request.urlopen(req) as response:
                 result = response.read().decode()
+                print(result)
         except BaseException as ex:
+            print(ex)
             scribble.log.error(ex)
         finally:
             py_request.urlcleanup()
