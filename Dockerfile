@@ -16,7 +16,7 @@ RUN flask --app pimpmygpt init-db
 EXPOSE 8080
 
 # Define environment variable
-ENV OPENAI_API_KEY=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
+ENV OPENAI_API_KEY=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
 ENV OPENAI_ORG=org-arjEfAsu33nzjAa2JdvG9lfS
 
 # Copy the entrypoint script into the container

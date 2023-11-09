@@ -53,16 +53,16 @@
     window.location.href = "{{ url_for('gpt.prompt') }}";
   }
 
-  document.addEventListener('DOMContentLoaded', function () {
-    const textareas = document.querySelectorAll('textarea');
+  // document.addEventListener('DOMContentLoaded', function () {
+  //   const textareas = document.querySelectorAll('textarea');
 
-    textareas.forEach(function (textarea) {
-      textarea.addEventListener('input', function () {
-        this.style.height = 'auto';
-        this.style.height = this.scrollHeight + 'px';
-      });
-    });
-  });
+  //   textareas.forEach(function (textarea) {
+  //     textarea.addEventListener('input', function () {
+  //       this.style.height = 'auto';
+  //       this.style.height = this.scrollHeight + 'px';
+  //     });
+  //   });
+  // });
 </script>
 {% endblock %}
 
@@ -81,16 +81,26 @@
 
 <form onsubmit="onSubmitHandler()" action="{{ url_for('gpt.answer') if enhanced_prompt else url_for('gpt.enhance') }}"
   method="post">
+
   {% if gpt_model == "gpt-3.5-turbo" or not gpt_model %}
   <select id="gpt-model" name="gpt-model" onchange="onChangeModelHandler()">
     <option value="gpt-3.5-turbo" selected>GPT-3.5-Turbo</option>
     <option value="gpt-4">GPT-4</option>
+    <option value="gpt-4-1106-preview">GPT-4-Turbo</option>
   </select>
   {% endif %}
   {% if gpt_model == "gpt-4" %}
   <select id="gpt-model" name="gpt-model" onchange="onChangeModelHandler()">
     <option value="gpt-3.5-turbo">GPT-3.5-Turbo</option>
     <option value="gpt-4" selected>GPT-4</option>
+    <option value="gpt-4-1106-preview">GPT-4-Turbo</option>
+  </select>
+  {% endif %}
+  {% if gpt_model == "gpt-4-1106-preview" %}
+  <select id="gpt-model" name="gpt-model" onchange="onChangeModelHandler()">
+    <option value="gpt-3.5-turbo">GPT-3.5-Turbo</option>
+    <option value="gpt-4">GPT-4</option>
+    <option value="gpt-4-1106-preview" selected>GPT-4-Turbo</option>
   </select>
   {% endif %}
 
@@ -167,7 +177,7 @@
   {% if enhanced_prompt %}
   <div>
     <label class="prompt-text-label" for="enhanced-prompt-input">enhanced prompt:</label>
-    <textarea id="enhanced-prompt-text" name="enhanced-prompt-input" rows="8" cols="50">
+    <textarea id="enhanced-prompt-text" name="enhanced-prompt-input" rows="20" cols="50">
         {{ enhanced_prompt }}
     </textarea>
   </div>
@@ -176,7 +186,7 @@
   {% if gpt_response %}
   <div>
     <label class="prompt-text-label" for="prompt-response-text">response:</label>
-    <textarea id="prompt-response-text" name="prompt-response-text" rows="12" cols="50">
+    <textarea id="prompt-response-text" name="prompt-response-text" rows="20" cols="50">
       {{ gpt_response }}
     </textarea>
   </div>

@@ -70,3 +70,9 @@
 2023-11-05 12:06:06,069 - pimpmygpt.pimp_scribbler - ERROR - expected string or bytes-like object, got 'NoneType'
 2023-11-05 12:29:41,816 - pimpmygpt.pimp_scribbler - ERROR - HTTP Error 404: Not Found
 2023-11-05 12:29:41,820 - pimpmygpt.pimp_scribbler - ERROR - expected string or bytes-like object, got 'NoneType'
+2023-11-05 14:24:22,850 - pimpmygpt.pimp_scribbler - ERROR - HTTP Error 401: Unauthorized
+2023-11-05 14:24:22,852 - pimpmygpt.pimp_scribbler - ERROR - expected string or bytes-like object, got 'NoneType'
+2023-11-05 14:24:29,332 - pimpmygpt.pimp_scribbler - ERROR - HTTP Error 401: Unauthorized
+2023-11-05 14:24:29,334 - pimpmygpt.pimp_scribbler - ERROR - expected string or bytes-like object, got 'NoneType'
+2023-11-05 14:25:45,388 - pimpmygpt.pimp_scribbler - ERROR - HTTP Error 401: Unauthorized
+2023-11-05 14:25:45,391 - pimpmygpt.pimp_scribbler - ERROR - expected string or bytes-like object, got 'NoneType'
